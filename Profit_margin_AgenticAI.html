@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: Predictive Maintenance System | Data Science Professional</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --primary-light: #34495e;
+            --secondary: #e67e22;
+            --secondary-light: #f39c12;
+            --dark: #1a1a2e;
+            --bg-color: #f5f5f7;
+            --card-bg: #ffffff;
+            --text: #333333;
+            --text-light: #666666;
+            --accent: #9b59b6;
+            --accent-light: #8e44ad;
+            --green: #27ae60;
+            --border: #e0e0e0;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Nunito', sans-serif;
+            color: var(--text);
+            background-color: var(--bg-color);
+            line-height: 1.7;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        /* Header */
+        header {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(245, 245, 247, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid rgba(224, 224, 224, 0.5);
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            position: relative;
+        }
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            transition: width 0.3s ease;
+        }
+        nav a:hover:after {
+            width: 100%;
+        }
+        nav a.active {
+            color: var(--accent);
+        }
+        nav a.active:after {
+            width: 100%;
+        }
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(26, 26, 46, 0.7), rgba(26, 26, 46, 0.8)), 
+                        url('https://images.unsplash.com/photo-1581092921461-eab10380ed77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            padding: 0 2rem;
+            animation: fadeIn 1s ease-out;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        .tag {
+            background-color: rgba(230, 126, 34, 0.2);
+            color: var(--secondary-light);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(230, 126, 34, 0.3);
+        }
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(230, 126, 34, 0.4);
+        }
+        /* Project Sections */
+        section {
+            padding: 1rem 0;
+        }
+        .section-title {
+            margin-bottom: 3rem;
+        }
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            bottom: -10px;
+            left: 0;
+            border-radius: 4px;
+        }
+        .project-overview {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .overview-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .metric-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+        .metric-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        .metric-label {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        .project-image {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        .project-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: all 0.8s ease;
+        }
+        .project-image:hover img {
+            transform: scale(1.05);
+        }
+        /* Architecture Section */
+        .architecture-section {
+            background-color: white;
+        }
+        .architecture-diagram {
+            margin: 2rem 0 4rem;
+            text-align: center;
+        }
+        .architecture-diagram img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .tech-card {
+            background: var(--bg-color);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        .tech-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .tech-card h3 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .tech-card i {
+            color: var(--secondary);
+        }
+        .tech-card ul {
+            list-style: none;
+            margin-left: 1.5rem;
+        }
+        .tech-card li {
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+        .tech-card li:before {
+            content: '▹';
+            position: absolute;
+            left: -1.5rem;
+            color: var(--accent);
+        }
+        /* Implementation Section */
+        .implementation-steps {
+            counter-reset: step;
+            margin-top: 3rem;
+        }
+        .step {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        .step-number {
+            flex: 0 0 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-right: 2rem;
+        }
+        .step-content {
+            flex: 1;
+            padding-top: 0.5rem;
+        }
+        .step-content h3 {
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .step-content p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+        /* Video Demo Section */
+        .video-section {
+            background-color: white;
+            text-align: center;
+        }
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        .video-container iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.9)), 
+                        url('https://images.unsplash.com/photo-1581093458791-9d8e8d92b58f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+        }
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .cta-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .cta-content p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .social-icon:hover {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            transform: translateY(-8px);
+        }
+        .social-icon i {
+            color: white;
+            font-size: 1.4rem;
+        }
+        .copyright {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.95rem;
+            margin-top: 2rem;
+        }
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .project-overview {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .video-container iframe {
+                height: 400px;
+            }
+        }
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+            nav ul {
+                gap: 1rem;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .video-container iframe {
+                height: 300px;
+            }
+            .step {
+                flex-direction: column;
+            }
+            .step-number {
+                margin-bottom: 1rem;
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="About.html" class="logo">DataSciPro</a>
+            <nav>
+                <ul>
+                    <li><a href="About.html">About</a></li>
+                    <li><a href="portfolio.html" class="active">Portfolio</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content"><br><br><br><br>
+            <h1>Complex Cost Optimization Driving margin higher</h1>
+            <p>An cutting-edge Agentic AI-powered solution leverages Agentic AI to deliver a comprehensive and actionable understanding of your financial performance, By providing a clear and concise picture of your profit and loss.</p>
+            <div class="tags">
+                <span class="tag">Agentic AI</span>
+                <span class="tag">LLM & Agents</span>
+                <span class="tag">Data Science Algorithms</span>
+            </div>
+        </div>
+    </section>
+
+	<section id="overview" class="overview-section">
+		<div class="container">
+			<div class="section-title">
+				<h2>Business Problem</h2>
+			</div>
+			<div class="overview-content">
+				<p>A leading manufacturing company faces the challenge of managing cost optimization across a diverse range of customized products catering to various industries, including agriculture, mining, defense, truck engine, and car engine. The complexity arises from the vast amount of data generated by multiple product lines, customer-specific requirements, and varying industry demands. As a result, the company struggles to maintain a clear understanding of its cost structure and identify opportunities for optimization.</p>
+				<p>The company's challenges can be summarized as follows:</p>
+				<ul>
+					<li>Identifying parts that have increased in cost and their impact on customers</li>
+					<li>Determining areas where cost optimization opportunities exist</li>
+					<li>Understanding the effect of cost increases on margins</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+    <section id="value" class="value-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Business Value</h2>
+            </div>
+            <div class="overview-content">
+                <p>Our solution enables your organization to unlock significant business value by optimizing costs, improving engineering efficiency, and informing pricing strategies.</p>
+                <p><strong>Cost Optimization:</strong> Understand why costs are increasing for specific parts, and identify opportunities to reduce costs and improve margins by switching suppliers or negotiating better prices. resulting in $10M annual savings.</p>
+                <p><strong>Engineering Optimization:</strong> Explore alternative parts or redesign products to reduce overall costs and improve margins.</p>
+                <p><strong>Informed Price Increase:</strong> Develop a robust negotiation strategy to support price increases, driven by a clear understanding of cost increases and their impact on pricing.</p>
+                <div class="metrics">
+                    <div class="metric-card">
+                        <div class="metric-value">$10M</div>
+                        <div class="metric-label">Cost Optimization</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">$2M</div>
+                        <div class="metric-label">Engineering Optimization</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">$10M</div>
+                        <div class="metric-label">Informed Price Increase</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="architecture" class="architecture-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>System Architecture</h2>
+            </div>
+            <div class="architecture-diagram">
+                <img src="https://miro.medium.com/max/2000/1*SMLxS-EcgEMT-rLJGiZ9mA.png" alt="System Architecture Diagram">
+            </div>
+        </div>
+    </section>
+
+    <section id="implementation" class="implementation-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Technical Implementation</h2>
+            </div>
+            <div class="implementation-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Data Collection</h3>
+                        <p>We collected data from multiple data systems and ingested it into Azure, ensuring a unified and centralized data repository. This step enabled us to access and process large volumes of data from various sources.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Feature Engineering</h3>
+                        <p>We utilized the latest data engineering techniques to ensure that the data is refreshed regularly and created workflows to generate the feature layer of the dataset. This step involved designing and implementing data pipelines to extract, transform, and load data into a suitable format for modeling.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Agentic AI Model Development & Training</h3>
+                        <p>We used LangChain to develop individual agents that were later orchestrated into an Agentic system using LangGraph, leveraging the power of Agentic AI. This step involved designing and training multiple models to perform specific tasks and integrating them into a cohesive system.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Model Observatory</h3>
+                        <p>We implemented a model observability framework to monitor and track the performance of our Agentic AI models in real-time, enabling us to identify areas for improvement. This step involved setting up metrics and logging mechanisms to measure model performance and detect potential issues.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Deployment</h3>
+                        <p>We deployed our Agentic AI-powered solution to a cloud-based infrastructure, ensuring scalability, reliability, and high availability. This step involved configuring and deploying the solution to a production-ready environment, where it can be accessed and utilized by stakeholders.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="demo" class="video-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Video Demo</h2>
+            </div>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Project Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Interested in a Similar Solution?</h2>
+                <p>Let's discuss how predictive maintenance or other data science solutions can help your business reduce costs and improve operations.</p>
+                <a href="contact.html" class="btn">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-medium-m"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

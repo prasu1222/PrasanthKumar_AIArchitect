@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Data Science Professional</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #5b7db1;
+            --primary-light: #8ca3d2;
+            --secondary: #f0b67f;
+            --secondary-light: #ffd5a5;
+            --dark: #2d3142;
+            --bg-color: #f6f7fb;
+            --card-bg: #ffffff;
+            --text: #424b5a;
+            --text-light: #6c757d;
+            --accent: #e76f51;
+            --accent-light: #f4a261;
+            --green: #588b76;
+            --green-light: #a7c4bc;
+            --border: #e9ecef;
+            --header-bg: rgba(246, 247, 251, 0.95);
+            --shadow: 0 10px 30px rgba(45, 49, 66, 0.08);
+            --hover-shadow: 0 15px 40px rgba(45, 49, 66, 0.12);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            color: var(--text);
+            background-color: var(--bg-color);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Creative Header with Glass Effect */
+        header {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(45, 49, 66, 0.06);
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(233, 236, 239, 0.5);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+        
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a:hover:after {
+            width: 100%;
+        }
+        
+        nav a.active {
+            color: var(--accent);
+        }
+        
+        nav a.active:after {
+            width: 100%;
+        }
+        
+        /* Hero Section with Creative Elements */
+        .hero {
+            padding: 12rem 0 8rem;
+            background: linear-gradient(rgba(45, 49, 66, 0.7), rgba(45, 49, 66, 0.8)), 
+                        url('https://images.unsplash.com/photo-1518186285589-2f7649de83e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Creative Floating Elements */
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--secondary);
+            top: -100px;
+            left: -100px;
+            animation: float 15s ease-in-out infinite;
+        }
+        
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--accent);
+            bottom: -50px;
+            right: 10%;
+            animation: float 18s ease-in-out infinite reverse;
+        }
+        
+        .circle-3 {
+            width: 150px;
+            height: 150px;
+            background: var(--primary);
+            top: 20%;
+            right: -50px;
+            animation: float 12s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(15px, -15px) rotate(5deg); }
+            50% { transform: translate(0, 10px) rotate(0deg); }
+            75% { transform: translate(-15px, -5px) rotate(-5deg); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+            animation: fadeInUp 1s ease-out;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            animation: fadeInUp 1s ease-out 0.2s forwards;
+            opacity: 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(91, 125, 177, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(91, 125, 177, 0.4);
+        }
+        
+        .btn:hover:before {
+            left: 0;
+        }
+        
+        section {
+            padding: 7rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 1.5rem auto 0;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        
+        /* Creative Expertise Cards */
+        .expertise-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+        
+        .expertise-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            border: 1px solid var(--border);
+        }
+        
+        .expertise-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: var(--hover-shadow);
+            border-color: var(--secondary);
+        }
+        
+        .expertise-img-container {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .expertise-img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: all 0.8s ease;
+        }
+        
+        .expertise-card:hover .expertise-img {
+            transform: scale(1.1);
+        }
+        
+        .expertise-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(45, 49, 66, 0.85), transparent);
+        }
+        
+        .expertise-overlay h3 {
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin: 0;
+        }
+        
+        .expertise-content {
+            padding: 2.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .expertise-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .expertise-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            flex-grow: 1;
+            line-height: 1.8;
+        }
+        
+        /* Creative Section Divider */
+        .section-divider {
+            position: relative;
+            height: 100px;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+        
+        .divider-wave {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-color);
+        }
+        
+        .divider-wave svg {
+            position: absolute;
+            width: 100%;
+            height: 50px;
+            bottom: 0;
+        }
+        
+        /* Project Cards with Creative Hover Effect */
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid var(--border);
+            position: relative;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--hover-shadow);
+            border-color: var(--secondary);
+        }
+        
+        .project-img-container {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .project-img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: all 0.8s ease;
+        }
+        
+        .project-card:hover .project-img {
+            transform: scale(1.1);
+        }
+        
+        /* Creative Overlay Effect */
+        .project-img-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(45, 49, 66, 0.7));
+            opacity: 0;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .project-card:hover .project-img-overlay {
+            opacity: 1;
+        }
+        
+        .view-project {
+            color: white;
+            background: rgba(91, 125, 177, 0.8);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease 0.1s;
+        }
+        
+        .project-card:hover .view-project {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .project-content {
+            padding: 2rem;
+        }
+        
+        .project-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover .project-content h3 {
+            color: var(--accent);
+        }
+        
+        .project-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-top: 1.2rem;
+        }
+        
+        .tag {
+            background-color: rgba(91, 125, 177, 0.08);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(91, 125, 177, 0.1);
+        }
+        
+        .project-card:hover .tag {
+            background-color: rgba(231, 111, 81, 0.08);
+            color: var(--accent);
+            border-color: rgba(231, 111, 81, 0.1);
+        }
+        
+        /* Creative Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 5rem 0 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1557682250-491c828fae5c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .footer-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .footer-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .footer-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-icon:hover {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            transform: translateY(-8px) scale(1.1);
+            box-shadow: 0 15px 35px rgba(91, 125, 177, 0.3);
+            border-color: transparent;
+        }
+        
+        .social-icon img {
+            width: 22px;
+            height: 22px;
+            filter: brightness(10);
+            transition: all 0.3s ease;
+        }
+        
+        .copyright {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.95rem;
+            margin-top: 4rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .expertise-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .hero {
+                padding: 10rem 0 6rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            section {
+                padding: 5rem 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
+            .expertise-img-container {
+                height: 220px;
+            }
+        }
+        
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="About.html" class="logo">Data Science Portofolio</a>
+            <nav>
+                <ul>
+                    <li><a href="About.html">About</a></li>
+                    <li><a href="portfolio.html" class="active">Portfolio</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="floating-circle circle-1"></div>
+        <div class="floating-circle circle-2"></div>
+        <div class="floating-circle circle-3"></div>
+        <div class="container hero-content">
+            <h1>Transforming Data Into Strategic Insights</h1>
+            <p>Explore my portfolio of data science and engineering solutions that have delivered measurable business impact across industries.</p>
+            <a href="#expertise" class="btn">View My Work</a>
+        </div>
+    </section>
+
+    <section id="expertise">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Areas of Expertise</h2>
+                <p>I transform complex data challenges into valuable business solutions through these specialized competencies.</p>
+            </div>
+            
+            <div class="expertise-container">
+                <div class="expertise-card fade-in">
+                    <div class="expertise-img-container">
+                        <img src="assets\Data_engineering.jpg" alt="Data Engineering" class="expertise-img">
+                        <div class="expertise-overlay">
+                            <h3>Data Engineering</h3>
+                        </div>
+                    </div>
+                    <div class="expertise-content">
+                        <h3>Data Engineering</h3>
+                        <p>I architect robust data infrastructure that forms the foundation for successful analytics. My engineering expertise ensures your data is clean, accessible, and optimized for analysis at scale.</p>
+                        <p>My work includes building ETL pipelines, data warehousing solutions, and real-time processing systems that transform raw data into structured, analysis-ready assets.</p>
+                        <a href="#data-engineering-projects" class="btn">View Projects</a>
+                    </div>
+                </div>
+                
+                <div class="expertise-card fade-in">
+                    <div class="expertise-img-container">
+                        <img src="assets/Data_Science.jpg" alt="Data Science" class="expertise-img">
+                        <div class="expertise-overlay">
+                            <h3>Data Science</h3>
+                        </div>
+                    </div>
+                    <div class="expertise-content">
+                        <h3>Data Science</h3>
+                        <p>I leverage statistical methods and machine learning to extract meaningful insights and build predictive models that drive business value and inform strategic decisions.</p>
+                        <p>From exploratory analysis and hypothesis testing to advanced machine learning models and deep learning systems, I develop solutions that turn your data into competitive advantage.</p>
+                        <a href="#data-science-projects" class="btn">View Projects</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider">
+        <div class="divider-wave">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#e9ecef" fill-opacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,218.7C672,235,768,245,864,229.3C960,213,1056,171,1152,154.7C1248,139,1344,149,1392,154.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+    </div>
+
+    <section id="data-science-projects">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Data Science Projects</h2>
+            </div>
+            
+            <div class="projects-container">
+                <div class="project-card fade-in">
+                    <div class="project-img-container">
+                        <img src="assets/Margin_Increse_Project.JPG" alt="Real-time Data Pipeline" class="project-img">
+                        <div class="project-img-overlay">
+                            <a href="Profit_margin_AgenticAI.html" class="view-project">View Details</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Complex Cost Optimization Driving margin higher</h3>
+                        <p>An cutting-edge Agentic AI-powered solution leverages Agentic AI to deliver a comprehensive and actionable understanding of your financial performance, By providing a clear and concise picture of your profit and loss.</p>
+                        <div class="tags">
+                            <span class="tag">Agentic AI</span>
+							<span class="tag">LLM & Agents</span>
+							<span class="tag">Data Science Algorithms</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-img-container">
+                        <img src="assets/Inventory_Optimization.jpg" alt="Cloud Data Warehouse" class="project-img">
+                        <div class="project-img-overlay">
+                            <a href="Inventory_Optimization.html" class="view-project">View Details</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Intelligent Inventory Optimization System</h3>
+                        <p>An State of the art machine learning-powered inventory optimization system that predicts optimal stock levels using time-series forecasting and machine learning, dynamically adjusting recommendations based on sales data and seasonal patterns to reduce both stockouts and overstock issues..</p>
+                        <div class="tags">
+                            <span class="tag">ARIMA, Prophet, and XGBoost models</span>
+                            <span class="tag">SQL and Azure Data Lake</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">Airflow for pipeline orchestration</span>
+                        </div>
+                    </div>
+                </div>
